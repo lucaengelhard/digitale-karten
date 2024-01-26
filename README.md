@@ -18,3 +18,7 @@ In einer früheren Version des Projekts waren noch Informationen über die Höhe
 ### Coding
 
 Umgesetzt wurde die Karte mit MapBox Studio und MapBox GL JS. In Studio wurden die Datensätze hochgeladen und in Ebenen verarbeitet, mit JavaScript wurde dann Interaktivität eingebaut.
+
+Die Anwendung bietet die Möglichkeit, entweder direkt mit der Karte zu interagieren und dann auf der Sidebar rechts detailliertere Informationen zur jeweiligen angeklickten PLZ zu erhalten oder anstattdessen im Suchfeld zu suchen und dann auszuwählen.
+
+Außerdem lassen sich die groben Bereiche filtern und alleine Darstellen lassen.
