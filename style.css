@@ -1,0 +1,119 @@
+body {
+  padding: 0;
+  margin: 0;
+
+  font-family: "Iosevka";
+  font-size: 0.75rem;
+}
+
+#map {
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  width: 15%;
+  height: 100%;
+
+  background: white;
+
+  padding: 1rem;
+}
+
+input {
+  padding: 0.2rem;
+  font-family: "Iosevka";
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 2rem;
+}
+
+.legende {
+  margin-bottom: 3rem;
+}
+
+h1 {
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.legende li {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 20px 1fr;
+  margin: 0;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.legende ul:has(.selected) li:not(.selected) {
+  opacity: 0.7;
+}
+
+.legende li:hover {
+  opacity: 1 !important;
+}
+
+.legende li.selected {
+  opacity: 1;
+}
+
+.color {
+  aspect-ratio: 1 / 1;
+}
+
+.legende0 .color {
+  background-color: #ff0000;
+}
+
+.legende1 .color {
+  background-color: #ff5500;
+}
+
+.legende2 .color {
+  background-color: #ffaa00;
+}
+
+.legende3 .color {
+  background-color: #ffff00;
+}
+
+.legende4 .color {
+  background-color: #aaff00;
+}
+
+.legende5 .color {
+  background-color: #55ff00;
+}
+
+.legende6 .color {
+  background-color: #00ff00;
+}
+
+.legende7 .color {
+  background-color: #00ff55;
+}
+
+.legende8 .color {
+  background-color: #00ffaa;
+}
+
+.legende9 .color {
+  background-color: #00ffff;
+}
