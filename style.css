@@ -1,8 +1,10 @@
+@import url(./iosevka/Iosevka.css);
+
 body {
   padding: 0;
   margin: 0;
 
-  font-family: "Iosevka";
+  font-family: "Iosevka Web", monospace;
   font-size: 0.75rem;
 }
 
