@@ -17,9 +17,10 @@ const map = new mapboxgl.Map({
 });
 
 map.on("load", (e) => {
-  search("Hinterdupfingen");
   searchInput();
   rangeSelect();
+
+  map.setFilter("plz selected", ["==", ["get", "name"], "Hinterdupfingen"]);
 });
 
 /*
@@ -227,6 +228,12 @@ map.on("click", (e) => {
   const { x, y } = e.point;
   console.log("screen x, y =", x, y);
   const clickedFeatures = map.queryRenderedFeatures(e.point);
+  map.setFilter("plz selected", ["==", ["get", "name"], "Hinterdupfingen"]);
+
+  try {
+    document.querySelector(".infobox").remove();
+  } catch (error) {}
+
   if (clickedFeatures.length) {
     const f = clickedFeatures[0];
 
@@ -251,7 +258,7 @@ map.on("click", (e) => {
       //createPopup(properties, point3d);
       createInfoBox(properties);
     } else {
-      search("Hinterdupfingen");
+      map.setFilter("plz selected", ["!=", ["get", "name"], "Hinterdupfingen"]);
     }
   }
 });
@@ -326,19 +333,40 @@ function searchInput() {
   searchFiled.addEventListener("input", () => {
     const query = searchFiled.value;
     if (query.length == 0) {
-      search("Hinterdupfingen");
+      map.setFilter("plz", ["!=", ["get", "name"], "Hinterdupfingen"]);
     } else {
-      search(query);
+      if (Array.from(document.querySelectorAll(".selected")).length > 0) {
+        search(query, true);
+      } else {
+        search(query);
+      }
     }
   });
 }
 
-function search(query) {
-  const filterQuery = ["in", query, ["get", "name"]];
+function search(query, rangeSelected) {
+  const queryLowerCase = query.toLowerCase();
+  const filterLowerCase = ["downcase", ["get", "name"]];
+  const filterQuery = ["in", queryLowerCase, filterLowerCase];
   const filterEmpty = ["!=", "", ["get", "name"]];
-  const filters = ["all", filterQuery, filterEmpty];
 
-  map.setFilter("plz selected", filters);
+  if (rangeSelected) {
+    const filterSearch = ["all", filterQuery, filterEmpty];
+
+    const rangeNumber = document.querySelector(".selected").innerText.charAt(0);
+
+    const getPLZ = ["get", "postCodeString"];
+    const slice = ["slice", getPLZ, 0, 1];
+    const toString = ["to-string", slice];
+
+    const filterRange = ["in", rangeNumber, toString];
+
+    const filters = ["all", filterSearch, filterRange];
+    map.setFilter("plz", filters);
+  } else {
+    const filters = ["all", filterQuery, filterEmpty];
+    map.setFilter("plz", filters);
+  }
 }
 
 function rangeSelect() {
